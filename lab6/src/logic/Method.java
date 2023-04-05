@@ -54,13 +54,12 @@ public class Method {
         return true;
     }
 
-    public List<Car> printSortPriceAndYear(List<Car> list) {
+    public void printSortPriceAndYear(List<Car> list) {
         list.stream()
                 .sorted()
                 .forEach(System.out::println);
-
-        return null;
     }
+
 
     public static <T> List<T> convertToList(T[] arr)
     {
@@ -71,22 +70,24 @@ public class Method {
         return list;
     }
 
-   public static List<Car> markSort(List<Car> list) {
-       Map<String, List<Car>> carMap = list.stream()
-               .collect(Collectors.groupingBy(Car::getMark));
 
-       carMap.forEach((mark, carList) -> {
-           System.out.println("Mark: " + mark);
-           carList.forEach(car -> {
-               System.out.println("Car{" +
-                       "id=" + car.getId() + ", model='" + car.getModel() + '\'' + ", year=" + car.getYear() + ", price=" + car.getPrice() + "$" + ", number=" + car.getNumber() + '}');
-           });
-           System.out.println();
-       });
+    public static void printMarkSort(List<Car> list) {
+        Map<String, List<Car>> carMap = list.stream()
+                .collect(Collectors.groupingBy(Car::getMark));
 
-       return list;
-   }
+        carMap.forEach((mark, carList) -> {
+            System.out.println("Mark: " + mark);
+            carList.stream()
+                    .sorted(Comparator.comparing(Car::getModel))
+                    .forEach(car -> {
+                        System.out.println("Car{" +
+                                "id=" + car.getId() + ", model='" + car.getModel() + '\'' + ", year=" + car.getYear() + ", price=" + car.getPrice() + "$" + ", number=" + car.getNumber() + '}');
+                    });
+            System.out.println();
+        });
 
 
+
+    }
 
 }
