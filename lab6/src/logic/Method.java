@@ -60,17 +60,6 @@ public class Method {
                 .forEach(System.out::println);
     }
 
-
-    public static <T> List<T> convertToList(T[] arr)
-    {
-        List<T> list = new ArrayList<>();
-        for (T i: arr) {
-            list.add(i);
-        }
-        return list;
-    }
-
-
     public static void printMarkSort(List<Car> list) {
         Map<String, List<Car>> carMap = list.stream()
                 .collect(Collectors.groupingBy(Car::getMark));
