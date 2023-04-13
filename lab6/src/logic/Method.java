@@ -60,23 +60,35 @@ public class Method {
                 .forEach(System.out::println);
     }
 
-    public static void printMarkSort(List<Car> list) {
+    public static List<Car> getMarkSortedCars(List<Car> list) {
         Map<String, List<Car>> carMap = list.stream()
+                .collect(Collectors.groupingBy(Car::getMark));
+
+        List<Car> sortedCars = new ArrayList<>();
+        carMap.forEach((mark, carList) -> {
+            carList.stream()
+                    .sorted(Comparator.comparing(Car::getModel))
+                    .forEach(sortedCars::add);
+        });
+        return sortedCars;
+    }
+
+    public static void printCarsByMark(List<Car> list) {
+        Map<String, List<Car>> carMap = getMarkSortedCars(list).stream()
                 .collect(Collectors.groupingBy(Car::getMark));
 
         carMap.forEach((mark, carList) -> {
             System.out.println("Mark: " + mark);
-            carList.stream()
-                    .sorted(Comparator.comparing(Car::getModel))
-                    .forEach(car -> {
-                        System.out.println("Car{" +
-                                "id=" + car.getId() + ", model='" + car.getModel() + '\'' + ", year=" + car.getYear() + ", price=" + car.getPrice() + "$" + ", number=" + car.getNumber() + '}');
-                    });
+            carList.forEach(car -> {
+                System.out.println("Car{" +
+                        "id=" + car.getId() + ", model='" + car.getModel() + '\'' + ", year=" + car.getYear() + ", price=" + car.getPrice() + "$" + ", number=" + car.getNumber() + '}');
+            });
             System.out.println();
         });
-
-
-
     }
 
+
+
+
 }
+
