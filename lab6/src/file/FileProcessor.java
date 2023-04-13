@@ -7,6 +7,7 @@ import logic.Method;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 public class FileProcessor {
     private final String fileName = "car";
@@ -59,7 +60,7 @@ public class FileProcessor {
                 new Car("Kia", "Optima", 2013, 13000,"BE6224CH"),
                 new Car("BMW","X5",2020,60000,"BE1938ME")
         };
-        List<Car> list = Method.convertToList(cars);
+        List<Car> list = Arrays.asList(cars);
 
         return list;
     }
