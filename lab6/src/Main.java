@@ -188,7 +188,9 @@ public class Main {
                     method.showAllCars(finalList2);
                 }),
                 new MenuItem("Для кожної моделі вивести список автомобілів.", () -> {
-                     method.markSort(finalList1);
+
+                    method.printCarsByMark(finalList1);
+
                 })
         );
         Menu menu = new Menu(menuItems);
